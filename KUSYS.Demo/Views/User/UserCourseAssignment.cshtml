@@ -1,0 +1,119 @@
+﻿@using KUSYS.Core.Entities.DataTransferObjects;
+@using KUSYS.Core.Entities;
+@using Microsoft.AspNetCore.Components;
+@model UserCourseAssignmentModel
+
+@{
+    ViewData["Title"] = "Course Assignment";
+}
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <div class="card">
+            <h5 class="card-header">Students</h5>
+            <div class="card-body">
+                <form asp-action="CourseAssignment">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <select asp-for="userAssignmentModel" class="form-control" onchange="SelectedIndexChanged(this.value)"
+                                asp-items="@(new SelectList(Model.userAssignmentModel, nameof(UserAssignmentModel.Id), nameof(UserAssignmentModel.FullName) ))">
+                        </select>
+                        <span asp-validation-for="userAssignmentModel" class="text-danger"></span>
+                    </div>
+
+                    <div class="mt-3">
+                        @*<a asp-action="EditUser" asp-route-id="@Model.courseAssignmentUserMod" class="btn btn-sm btn-primary">List Courses</a>*@
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@if (ViewData["UserId"] != null)
+{
+    <div class="row">
+        <div class="card">
+            <div class="card-header d-flex">
+                <h5 class="me-auto">Courses[@ViewData["FullName"]]</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>Ops</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.courseAssignmentModel ?? new())
+                        {
+                            var backgroundColor = item.IsAssignment ? "aqua" : "";
+
+                            <tr style="background-color:@backgroundColor">
+                                <td>@item.CourseCode</td>
+                                <td>@item.Name </td>
+                                <td>
+                                    <button class="btn btn-primary" data-userId="@ViewData["UserId"]" data-courseId="@item.CourseId" onclick="Assignment(this)">Assignment</button>
+                                    <button class="btn btn-danger" data-userId="@ViewData["UserId"]" data-courseId="@item.CourseId" onclick="RemoveAssignment(this)">Remove</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+
+
+<script type="text/javascript">
+    function SelectedIndexChanged(val) {
+        window.location.href = "/User/UserCourseAssignment/" + val;
+    }
+
+    function Assignment(val) {
+        var json = {
+            userId: $(val).attr("data-userId"),
+            courseId: $(val).attr("data-courseId"),
+        }
+        var req = new XMLHttpRequest();
+        req.open("POST", window.location.origin + "/User/UserCourseAssignment?userId=" + json.userId + "&courseId=" + json.courseId, false);
+        req.setRequestHeader("OData-MaxVersion", "4.0");
+        req.setRequestHeader("OData-Version", "4.0");
+        req.setRequestHeader("Accept", "application/json");
+        req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+        req.onreadystatechange = function () {
+            if (this.readyState === 4) {
+                req.onreadystatechange = null;
+                if (this.status === 200) {
+                    location.reload();
+                } else {
+                    console.log(this.statusText);
+                }
+            }
+        };
+        req.send();
+    }
+
+    function RemoveAssignment(val) {
+        var json = {
+            userId: $(val).attr("data-userId"),
+            courseId: $(val).attr("data-courseId"),
+        }
+        var req = new XMLHttpRequest();
+        req.open("POST", window.location.origin + "/User/RemoveUserCourseAssignment?userId=" + json.userId + "&courseId=" + json.courseId, false);
+        req.setRequestHeader("OData-MaxVersion", "4.0");
+        req.setRequestHeader("OData-Version", "4.0");
+        req.setRequestHeader("Accept", "application/json");
+        req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+        req.onreadystatechange = function () {
+            if (this.readyState === 4) {
+                req.onreadystatechange = null;
+                console.log(this.statusText);
+                location.reload();
+            }
+        };
+        req.send();
+    }
+</script>  

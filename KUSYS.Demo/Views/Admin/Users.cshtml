@@ -1,0 +1,43 @@
+﻿@using KUSYS.Core.Entities;
+@model List<User>
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+<div class="card">
+    <div class="card-header d-flex">
+        <h5 class="me-auto">Users</h5>
+        <div class="d-inline-block">
+            <a asp-action="Register" class="btn btn-primary btn-sm">Add</a>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>FullName</th>
+                    <th>Ops</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model ?? new())
+                {
+                    <tr>
+                        <td>@item.FirstName @item.LastName</td>
+                        <td>
+                            <div class="btn-group">
+                                <a asp-action="EditUser" asp-route-id="@item.Id">
+                                    <span class="btn btn-sm btn-primary me-2">View</span>
+                                </a>
+                                <form asp-action="DeleteUser" asp-route-id="@item.Id">
+                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

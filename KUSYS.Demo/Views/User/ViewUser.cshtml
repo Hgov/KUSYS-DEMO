@@ -1,0 +1,64 @@
+﻿@using KUSYS.Core.Entities.DataTransferObjects;
+@model EditUserModel
+
+@{
+    ViewData["Title"] = "View user";
+}
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <div class="card">
+            <h5 class="card-header">View user</h5>
+            <div class="card-body">
+                <form asp-action="ViewUser">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="FirstName"></label>
+                        <input disabled asp-for="FirstName" class="form-control" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="LastName"></label>
+                        <input disabled asp-for="LastName" class="form-control" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="BirthDate"></label>
+                        <input disabled asp-for="BirthDate" class="form-control" type="date" />
+                        <span asp-validation-for="BirthDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="UserName"></label>
+                        <input disabled asp-for="UserName" class="form-control" />
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Email"></label>
+                        <input disabled asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="mt-2 mb-2">
+                        @for (var i = 0; i < Model?.Roles.Count(); i++)
+                        {
+                            <div class="custom-control custom-checkbox">
+                                <input disabled asp-for="@Model.Roles[i].IsAssigned" class="custom-control-input">
+                                <label asp-for="@Model.Roles[i].IsAssigned" class="custom-control-label">@Model.Roles[i].RoleName</label>
+                                <input disabled asp-for="@Model.Roles[i].RoleId" type="hidden" />
+                                <input disabled asp-for="@Model.Roles[i].RoleName" type="hidden" />
+                            </div>
+                        }
+                    </div>
+
+                    <div class="mt-3">
+                        <a asp-controller="User" asp-action="Users" class="btn btn-link">Users</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
