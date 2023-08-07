@@ -9,5 +9,7 @@ Uygulama kurulurken;
 
 
 2-"Core" kütüphanesi altındaki migration tetiklenmeli.(direk test yapılabilmesi için admin ve bir öğrenci migration tetiklendiğinde oluşturulur.)  
+testuser1@kusys.com -- Q.werty123
+testadmin1@kusys.com -- Q.werty123
 
 ![image](https://github.com/Hgov/KUSYS-DEMO/assets/79797718/ed18e4b0-a625-424d-9204-dad7baaa53c6)
