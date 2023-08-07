@@ -64,6 +64,11 @@ namespace KUSYS.Demo.Controllers
                     {
                         await _userManager.ResetAccessFailedCountAsync(user);
                         await _userManager.SetLockoutEndDateAsync(user, null);
+                        var returnUrl = TempData["ReturnUrl"];
+                        if (returnUrl != null)
+                        {
+                            return Redirect(returnUrl.ToString() ?? "/");
+                        }
                         return RedirectToAction("index", "Home");
                     }
                     else if (result.IsLockedOut)
