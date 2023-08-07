@@ -333,7 +333,7 @@ namespace KUSYS.Demo.Controllers
         public async Task<IActionResult> UserCourseAssignment(InsertUserCourseAssignmentModel insertUserCourseAssignmentModel)
         {
             var selectedUser = await _userManager.Users.Where(x => x.Id == insertUserCourseAssignmentModel.userId).FirstOrDefaultAsync();
-            var selectedCourse = await _unitOfWork.CourseRepository.GetByIDAsync(new Guid(insertUserCourseAssignmentModel.courseId).ToString());
+            var selectedCourse = await _unitOfWork.CourseRepository.GetByIDAsync(insertUserCourseAssignmentModel.courseId);
             var userCourse = new UserCourse
             {
                 course = selectedCourse,

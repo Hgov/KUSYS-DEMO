@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace KUSYS.Core.Migrations
 {
-    public partial class createDb : Migration
+    public partial class createDb2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -193,6 +193,45 @@ namespace KUSYS.Core.Migrations
                         principalColumn: "CourseId",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "2c5e174e-3b0e-446f-86af-483d56fd7210", "b7bd2c3b-2a98-4812-bf84-5b2697cba633", "Admin", "ADMIN" },
+                    { "2k5e174e-3b0e-446f-86af-483d56fd7211", "be95aba7-2436-4693-8452-d47ff1b4dffc", "Student", "STUDENT" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "BirthDate", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { "8e445865-a24d-4543-a6c6-9443d048cd10", 0, null, "61e0e771-af3a-4cd6-ab0f-d0ff18221e3c", "teststudent1@kusys.com", true, "TestStudent", null, false, null, "TESTSTUDENT1@KUSYS.COM", "TESTSTUDENT1", "AQAAAAEAACcQAAAAEFXel1mAYbpOWgzNOiPzSPo6iG+bYURUq6sqCfyTrV6umK2zR9eWdNUtNWCJZ1MMqA==", null, false, "6131dd1f-605e-4ee6-8803-4a693961baf1", false, "teststudent1" },
+                    { "8e445865-a24d-4543-a6c6-9443d048cdb9", 0, null, "77baeafb-6f2f-4525-bdb3-347ec66b25ef", "testadmin1@kusys.com", true, "TestAdmin1", null, false, null, "TESTADMIN1@KUSYS.COM", "TESTADMIN1", "AQAAAAEAACcQAAAAEM+H1kAL92WVBg81ExnMPAspQ1OU0aZ6EplOhfi8nx7fJHnhedY6H4Ja+KXLrR9ZAw==", null, false, "6d7f2f98-c565-4baf-844c-b1f2cbb62342", false, "testadmin1" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Courses",
+                columns: new[] { "CourseId", "CourseCode", "Name" },
+                values: new object[,]
+                {
+                    { "6y445865-a24d-4543-a6c6-9443d048cd10", "CSI101", "Introduction to Computer Science" },
+                    { "6y445865-a24d-4543-a6c6-9443d048cd11", "CSI102", "Algorithms" },
+                    { "6y445865-a24d-4543-a6c6-9443d048cd12", "MAT101", "Calculus" },
+                    { "6y445865-a24d-4543-a6c6-9443d048cd13", "PHY101", "Physics" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "2k5e174e-3b0e-446f-86af-483d56fd7211", "8e445865-a24d-4543-a6c6-9443d048cd10" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "2c5e174e-3b0e-446f-86af-483d56fd7210", "8e445865-a24d-4543-a6c6-9443d048cdb9" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KUSYS.Core.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230806215659_createDb")]
-    partial class createDb
+    [Migration("20230807111956_createDb2")]
+    partial class createDb2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,6 +38,32 @@ namespace KUSYS.Core.Migrations
                     b.HasKey("CourseId");
 
                     b.ToTable("Courses");
+
+                    b.HasData(
+                        new
+                        {
+                            CourseId = "6y445865-a24d-4543-a6c6-9443d048cd10",
+                            CourseCode = "CSI101",
+                            Name = "Introduction to Computer Science"
+                        },
+                        new
+                        {
+                            CourseId = "6y445865-a24d-4543-a6c6-9443d048cd11",
+                            CourseCode = "CSI102",
+                            Name = "Algorithms"
+                        },
+                        new
+                        {
+                            CourseId = "6y445865-a24d-4543-a6c6-9443d048cd12",
+                            CourseCode = "MAT101",
+                            Name = "Calculus"
+                        },
+                        new
+                        {
+                            CourseId = "6y445865-a24d-4543-a6c6-9443d048cd13",
+                            CourseCode = "PHY101",
+                            Name = "Physics"
+                        });
                 });
 
             modelBuilder.Entity("KUSYS.Core.Entities.Role", b =>
@@ -65,6 +91,22 @@ namespace KUSYS.Core.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "2c5e174e-3b0e-446f-86af-483d56fd7210",
+                            ConcurrencyStamp = "b7bd2c3b-2a98-4812-bf84-5b2697cba633",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "2k5e174e-3b0e-446f-86af-483d56fd7211",
+                            ConcurrencyStamp = "be95aba7-2436-4693-8452-d47ff1b4dffc",
+                            Name = "Student",
+                            NormalizedName = "STUDENT"
+                        });
                 });
 
             modelBuilder.Entity("KUSYS.Core.Entities.User", b =>
@@ -139,6 +181,42 @@ namespace KUSYS.Core.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "77baeafb-6f2f-4525-bdb3-347ec66b25ef",
+                            Email = "testadmin1@kusys.com",
+                            EmailConfirmed = true,
+                            FirstName = "TestAdmin1",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "TESTADMIN1@KUSYS.COM",
+                            NormalizedUserName = "TESTADMIN1",
+                            PasswordHash = "AQAAAAEAACcQAAAAEM+H1kAL92WVBg81ExnMPAspQ1OU0aZ6EplOhfi8nx7fJHnhedY6H4Ja+KXLrR9ZAw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "6d7f2f98-c565-4baf-844c-b1f2cbb62342",
+                            TwoFactorEnabled = false,
+                            UserName = "testadmin1"
+                        },
+                        new
+                        {
+                            Id = "8e445865-a24d-4543-a6c6-9443d048cd10",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "61e0e771-af3a-4cd6-ab0f-d0ff18221e3c",
+                            Email = "teststudent1@kusys.com",
+                            EmailConfirmed = true,
+                            FirstName = "TestStudent",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "TESTSTUDENT1@KUSYS.COM",
+                            NormalizedUserName = "TESTSTUDENT1",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFXel1mAYbpOWgzNOiPzSPo6iG+bYURUq6sqCfyTrV6umK2zR9eWdNUtNWCJZ1MMqA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "6131dd1f-605e-4ee6-8803-4a693961baf1",
+                            TwoFactorEnabled = false,
+                            UserName = "teststudent1"
+                        });
                 });
 
             modelBuilder.Entity("KUSYS.Core.Entities.UserCourse", b =>
@@ -241,6 +319,18 @@ namespace KUSYS.Core.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "8e445865-a24d-4543-a6c6-9443d048cdb9",
+                            RoleId = "2c5e174e-3b0e-446f-86af-483d56fd7210"
+                        },
+                        new
+                        {
+                            UserId = "8e445865-a24d-4543-a6c6-9443d048cd10",
+                            RoleId = "2k5e174e-3b0e-446f-86af-483d56fd7211"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
